@@ -22,22 +22,21 @@ const HomePage = () => {
                     ];
 
     useEffect(() => {
-     const isWinner=checkWinner();
-     if(isWinner){
+     if(!checkWinner()){
         checkDraw();
      }
-    
-    }, [boardArray])
+     
+    }, [boardArray]);
     
     const checkWinner=()=>{
         for(let i=0;i<checkResult.length;i++){
-            const [x,y,z]=checkResult[i]
+            const [x,y,z]=checkResult[i];
             if(boardArray[x]&&boardArray[x]===boardArray[y]&& boardArray[x]===boardArray[z]){
                 toast.success(`${!isX?'X':'O'} is the winner`);
                 
                 setWinners((prevState)=>[...prevState,!isX?'X':'O'])
                 setBoardArray(Array(9).fill(null));
-                return true
+                return true;
             }
         }
         return null;
